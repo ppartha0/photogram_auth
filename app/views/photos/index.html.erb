@@ -28,12 +28,31 @@
           </a>
           
           <div>
-            <!-- Add likes -->
-            <% photo.fans.each do |fan| %>
-              <small>
-                <%= fan.username %>
-              </small>
+            <!-- Logic to put in a filled heart vs empty heart -->
+            <% if photo.fans.include? User.find(current_user.id).username %>
+              <a href="/delete_like/<%= photo.likes.where(user_id: current_user.id) %>" class="btn btn-link">
+                <i class="fa fa-heart"></i>
+              </a>
+            <% else %>
+              <form action="/create_like" method="post">
+              
+                <input type="hidden" name="photo_id" value=<%= photo.id %>>
+
+                <input type="hidden" name="user_id" value=<%= current_user.id %>>
+
+                <button class="btn btn-link">
+                  <i class="fa fa-heart-o"></i>
+                </button>
+              </form>
             <% end %>
+              
+            <!-- Now add list of user names who like photo -->
+            <% photo.fans.each do |fan| %>
+            <p>
+                <%= fan.username %>
+            <% end %>    
+            like this    
+            </p> 
           </div>
         
           <div>
