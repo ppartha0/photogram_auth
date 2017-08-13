@@ -82,14 +82,18 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="/users/edit">
-              <i class="fa fa-fw fa-edit"></i> 
+             
                 <% if user_signed_in? %>
-                  <%= User.find(current_user.id).username %>
+                  <a href="/users/edit">
+                    <i class="fa fa-fw fa-edit"></i>
+                      <%= User.find(current_user.id).username %>
+                  </a>    
                 <% else %>
-                  Sign In
+                  <a href="/users/sign_in">
+                    Sign In
+                  </a>  
                 <% end %>  
-            </a>
+            
           </li>
           <li>
               <% if user_signed_in? %>
