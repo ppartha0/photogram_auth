@@ -12,4 +12,10 @@ class UsersController < ApplicationController
         render("users/show.html.erb")
     end
     
+    def mylikes
+        userid = current_user.id
+        @photos = User.find(userid).liked_photos
+
+        render("users/mylikes.html.erb")
+    end
 end
