@@ -65,26 +65,27 @@
             </a>
           </li>
          
-         
-         
-         
-         
-         
-         
           <li><a href="/rails/git">Git</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            
-            <a href="/users/edit"> <i class="fa fa-fw fa-edit"></i> <%= User.find(current_user.id).username %>
+            <a href="/users/edit">
+              <i class="fa fa-fw fa-edit"></i> 
+                <% if user_signed_in? %>
+                  <%= User.find(current_user.id).username %>
+                <% else %>
+                  Sign In
+                <% end %>  
             </a>
           </li>
           <li>
-            <a href="/users/sign_out" data-method="delete" rel="nofollow">
-              <i class="fa fa-fw fa-sign-out"></i>
-              Sign Out
-            </a>
+              <% if user_signed_in? %>
+                <a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-fw fa-sign-out"></i>Sign Out</a>
+              <% else %>
+                <a href="/users/sign_up">Sign Up</a>
+              <% end %>  
+            
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->
