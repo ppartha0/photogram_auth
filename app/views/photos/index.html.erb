@@ -24,17 +24,29 @@
             <img src="<%= photo.image %>" class="img-responsive">
           </a>
           
-          <p>
-            <%= photo.caption %>
-            <%= photo.user_id %>
-            
-            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          </p>
-        </div>
-        
+          <%if current_user.id == photo.user_id %>  
+            <div class="btn-group btn-group-justified">
+              <a href="/photos" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+              <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </div>
+          <% else %>
+            <div class="btn-group btn-group-justified">
+              <a href="/photos" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+            </div>
+          <%end %>  
           
-        
-        <% end %>
+        </div>
+      
+      <% end %>
         
     </div>
   </div>
