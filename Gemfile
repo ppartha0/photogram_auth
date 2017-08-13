@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
-require 'action_view'
-require 'action_view/helpers'
-include ActionView::Helpers::DateHelper
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
