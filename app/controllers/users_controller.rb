@@ -3,5 +3,13 @@ class UsersController < ApplicationController
         @users = User.all
 
         render("users/index.html.erb")
-  end
+    end
+    
+    def show
+        userid = params[:id]
+        @photos = User.find(userid).photos
+
+        render("users/show.html.erb")
+    end
+    
 end
