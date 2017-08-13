@@ -1,9 +1,13 @@
-<div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
-</div>
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <a href="/photos/new" class="btn btn-default btn-block">
+          <i class="fa fa-plus"></i>
+        </a>
+      <hr>
+      </div>
+    </div>
+
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
@@ -29,13 +33,16 @@
           
           <div>
             <!-- Logic to put in a filled heart vs empty heart -->
-            <% if photo.fans.include? User.find(current_user.id).username %>
-              <a href="/delete_like/<%= photo.likes.where(user_id: current_user.id) %>" class="btn btn-link">
-                <i class="fa fa-heart"></i>
-              </a>
+            <% if photo.fans.any? {|u| u[:username] == User.find(current_user.id).username} == true %>
+              <% photo.likes.each do |like| %>
+                <% if like.user_id == current_user.id %>
+                  <a href="/delete_like/<%= like.id %>" class="btn btn-link"><i class="fa fa-heart"></i></a>
+                <% end %>
+              <%end%>
             <% else %>
-              <form action="/create_like" method="post">
-              
+                <form action="/create_like" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %>>
                 <input type="hidden" name="photo_id" value=<%= photo.id %>>
 
                 <input type="hidden" name="user_id" value=<%= current_user.id %>>
@@ -142,4 +149,5 @@
         
     </div>
   </div>
+</div>
 </div>
