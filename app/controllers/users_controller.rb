@@ -18,4 +18,5 @@ class UsersController < ApplicationController
 
         render("users/mylikes.html.erb")
     end
+
 end
