@@ -65,6 +65,20 @@
           <!-- Show existing comments -->
           <div>
             <ul class="media-list">
+              <!-- Show photo caption as comment first -->
+              <li class="media">
+                <div class="media-body">
+                  <h6 class="media-heading">
+                    <a href="/users/<%= current_user.id %>"> <%= User.find(current_user.id).username %> </a>
+                    <small>
+                      <%= time_ago_in_words(photo.created_at) %>
+                    </small>
+                  </h6>
+                  <%= photo.caption %>
+                </div>
+              </li>
+              
+              
               <% photo.comments.each do |comment| %>
               <li class="media">
                 <div class="media-body">
